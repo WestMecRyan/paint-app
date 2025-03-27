@@ -1,5 +1,6 @@
-test
-import { Image, StyleSheet, Platform, ScrollView, View, Text } from 'react-native';
+import { Image, StyleSheet, Platform, ScrollView, View, Text, TouchableOpacity, PanResponder, Modal, Dimensions, Alert } from 'react-native';
+import { } from 'react-native-svg';
+import slider from '@react-native-community/slider';
 import { StatusBar } from 'expo-status-bar';
 // import ParallaxScrollView from '@/components/ParallaxScrollView';
 // import { ThemedText } from '@/components/ThemedText';
@@ -13,6 +14,7 @@ export default function Paint() {
       <View style={styles.header}>
         <Text style={styles.title}>Paint</Text>
       </View>
+      <View style={styles.canvasContainer}></View>
     </ScrollView>
   );
 }
@@ -33,4 +35,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 5
   },
+  canvasContainer: {
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: '#000',
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    alignItems: 'center',
+    width: '100%',
+    height: 400,
+    elevation: 7
+
+  }
 });

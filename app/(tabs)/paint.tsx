@@ -1,12 +1,31 @@
+import { useState } from 'react';
 import { Image, StyleSheet, Platform, ScrollView, View, Text, TouchableOpacity, PanResponder, Modal, Dimensions, Alert } from 'react-native';
-import { } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import slider from '@react-native-community/slider';
 import { StatusBar } from 'expo-status-bar';
-// import ParallaxScrollView from '@/components/ParallaxScrollView';
-// import { ThemedText } from '@/components/ThemedText';
-// import { ThemedView } from '@/components/ThemedView';
 
 export default function Paint() {
+  const [paths, setPaths] = useState<Array<{ path: string }>>([]);
+  const [currentPath, setCurrentPath] = useState("");
+
+  // PanResponder:
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderGrant: (evt) => {
+      const { locationX, locationY } = evt.nativeEvent;
+      setCurrentPath((prev)=>prev + `M${locationX},${locationY}`);
+    },
+    onPanResponderMove: (evt) => {
+      const { locationX, locationY } = evt.nativeEvent;
+      setCurrentPath((prev)=>prev + ` L${locationX},${locationY}`);
+    },
+    onPanResponderRelease: () => {
+      if (currentPath) {
+        setPaths((prevPaths) => [...prevPaths, { path: currentPath }]);
+        setCurrentPath('');
+      }
+    }
+  });
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="auto" />

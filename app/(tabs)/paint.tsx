@@ -4,13 +4,13 @@ import { StatusBar } from 'expo-status-bar';
 // import { ThemedText } from '@/components/ThemedText';
 // import { ThemedView } from '@/components/ThemedView';
 
-export default function HomeScreen() {
+export default function Paint() {
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="auto" />
 
       <View style={styles.header}>
-        <Text style={styles.title}>About Paint App</Text>
+        <Text style={styles.title}>Paint</Text>
       </View>
     </ScrollView>
   );

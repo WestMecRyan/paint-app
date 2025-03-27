@@ -8,6 +8,28 @@ import { StatusBar } from 'expo-status-bar';
 // import { ThemedView } from '@/components/ThemedView';
 
 export default function Paint() {
+  const [paths, setPaths] = useState<Array<{ path: string }>>([]);
+  const [currentPath, setCurrentPath] = useState("");
+
+  // Pan Responder onStart, onMove, onGrant, onRelease
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onPanResponderGrant: (evt) => {
+      const { locationX, locationY } = evt.nativeEvent;
+      setCurrentPath(`M${locationX},${locationY}`);
+    },
+    onPanResponderMove: (evt) => {
+      const { locationX, locationY } = evt.nativeEvent;
+      setCurrentPath((prev) => prev + ` L${locationX},${locationY}`);
+    },
+    onPanResponderRelease: () => {
+      if (currentPath) {
+        setPaths((prevPaths) => [...prevPaths, { path: currentPath }]);
+        setCurrentPath('');
+      }
+    }
+  });
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="auto" />
@@ -38,7 +60,7 @@ const styles = StyleSheet.create({
   },
   canvasContainer: {
     marginTop: 20,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
     borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

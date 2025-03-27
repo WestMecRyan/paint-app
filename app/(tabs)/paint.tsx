@@ -1,3 +1,4 @@
+test
 import { Image, StyleSheet, Platform, ScrollView, View, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 // import ParallaxScrollView from '@/components/ParallaxScrollView';
